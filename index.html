@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>Omassery Rush 3D</title>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: #9ed7f2;
+  color: white;
+  touch-action: none;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#loading {
+  position: fixed;
+  inset: 0;
+  background: #101c20;
+  display: grid;
+  place-items: center;
+  z-index: 10;
+  transition: opacity .7s;
+  font-size: 24px;
+}
+
+#hud {
+  position: fixed;
+  inset: 12px 12px auto;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  gap: 8px;
+}
+
+.panel {
+  background: #101c20cc;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+#message {
+  position: fixed;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #101c20dd;
+  padding: 12px;
+  border-radius: 10px;
+  opacity: .65;
+  text-align: center;
+  pointer-events: none;
+}
+
+#controls {
+  position: fixed;
+  bottom: 20px;
+  left: 15px;
+  display: grid;
+  grid-template-columns: repeat(3, 55px);
+  gap: 6px;
+}
+
+#actions {
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+button {
+  background: #142c32dd;
+  color: white;
+  border: 1px solid #ffffff66;
+  border-radius: 13px;
+  min-width: 55px;
+  min-height: 52px;
+  font-size: 17px;
+  font-weight: bold;
+  touch-action: none;
+}
+
+button:active {
+  background: #168b68;
+}
+
+#mission {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #142c32dd;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  width: max-content;
+  max-width: 70%;
+  text-align: center;
+  pointer-events: none;
+}
+
+@media (min-width: 900px) {
+  #controls, #actions {
+    opacity: .8;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading">LOADING OMASSERY RUSH...</div>
+
+<div id="hud">
+  <div class="panel">
+    <b>OMASSERY RUSH</b><br>
+    <span id="mode">ON FOOT</span>
+  </div>
+  <div class="panel">
+    <span id="clock">08:30</span><br>
+    <span id="distance">CHECKPOINT</span>
+  </div>
+</div>
+
+<div id="message">Welcome to Omassery Rush!</div>
+
+<div id="controls">
+  <span></span>
+  <button data-key="w">▲</button>
+  <span></span>
+
+  <button data-key="a">◀</button>
+  <button data-key="s">▼</button>
+  <button data-key="d">▶</button>
+</div>
+
+<div id="actions">
+  <button data-action="interact">E · ENTER</button>
+  <button data-action="run">RUN</button>
+  <button data-action="brake">BRAKE</button>
+</div>
+
+<div id="mission">
+  <span id="missionText">Reach the green checkpoint!</span>
+</div>
+
+<script type="module" src="./game.js"></script>
+
+</body>
+</html>
